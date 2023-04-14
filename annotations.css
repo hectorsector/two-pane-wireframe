@@ -1,4 +1,5 @@
 /* hide class titled annotations */
 .annotation {
     /* display: none; */
+    flex-direction: row;
 }
