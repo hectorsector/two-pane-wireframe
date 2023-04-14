@@ -93,6 +93,7 @@
       content="https://github.githubassets.com/images/modules/open_graph/github-logo.png"
     />
     <meta name="next-head-count" content="29" />
+    <link rel="stylesheet" href="annotations.css" />
     <link
       rel="preload"
       href="next/static/css/bdb3b37d1eaa48b5.css"
@@ -3883,55 +3884,64 @@ jobs:
                             </svg>
                           </button>
                         </header>
-                        <pre><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">'Link Checker: All English'</span>
+<pre><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">'Link Checker: All English'</span>
+<div class="annotation">L1: The name of the workflow as it will appear in the "Actions" tab of the GitHub repository.</div>
 
 <span class="hljs-comment"># **What it does**: Renders the content of every page and check all internal links.</span>
 <span class="hljs-comment"># **Why we have it**: To make sure all links connect correctly.</span>
 <span class="hljs-comment"># **Who does it impact**: Docs content.</span>
 
-<span class="hljs-attr">on:</span>
-  <span class="hljs-attr">workflow_dispatch:</span>
+<span class="hljs-attr">on:</span><div class="annotation">L7: The on keyword lets you define the events that trigger when the workflow is run. You can define multiple events here. For more information, see "Triggering a workflow."</div>
+  <span class="hljs-attr">workflow_dispatch:</span><div class="annotation">L8: Add the workflow_dispatch event if you want to be able to manually run this workflow from the UI. For more information, see  workflow_dispatch.</div>
   <span class="hljs-attr">push:</span>
     <span class="hljs-attr">branches:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>
-  <span class="hljs-attr">pull_request:</span>
-
+      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span><div class="annotation">L9-11: Add the push event, so that the workflow runs automatically every time a commit is pushed to a branch called main. For more information, see  push.</div>
+      <span class="hljs-attr">pull_request:</span>
+<div class="annotation">L12: Add the pull_request event, so that the workflow runs automatically every time a pull request is created or updated. For more information, see pull_request.
+</div>
 <span class="hljs-attr">permissions:</span>
   <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
   <span class="hljs-comment"># Needed for the 'trilom/file-changes-action' action</span>
   <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">read</span>
-
+<div class="annotation">L14-17: Modifies the default permissions granted to GITHUB_TOKEN. This will vary depending on the needs of your workflow. For more information, see "Assigning permissions to jobs."
+</div>
 <span class="hljs-comment"># This allows a subsequently queued workflow run to interrupt previous runs</span>
 <span class="hljs-attr">concurrency:</span>
-  <span class="hljs-attr">group:</span> <span class="hljs-string">'$<span class="hljs-template-variable">{{ github.workflow }}</span> @ $<span class="hljs-template-variable">{{ github.event.pull_request.head.label || github.head_ref || github.ref }}</span>'</span>
+  <span class="hljs-attr">group:</span> <span class="hljs-string">'$<span class="hljs-template-variable">{{ github.workflow }}</span> @ $<span class="hljs-template-variable">{{ github.event.pull_request.head.label || github.head_ref || github.ref }}</span>'</span><div class="annotation">L20-21: Creates a concurrency group for specific events, and uses the || operator to define fallback values. For more information, see "Using concurrency."</div>
   <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span>
-
-<span class="hljs-attr">jobs:</span>
-  <span class="hljs-attr">check-links:</span>
-    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span>
-    <span class="hljs-attr">steps:</span>
+<div class="annotation">L22: Cancels any currently running job or workflow in the same concurrency group.
+</div>
+<span class="hljs-attr">jobs:</span><div class="annotation">L24: Groups together all the jobs that run in the workflow file.</div>
+  <span class="hljs-attr">check-links:</span><div class="annotation">L25: Defines a job with the ID check-links that is stored within the jobs key.</div>
+    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span><div class="annotation">L26: Configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. In this example, the job will run on a self-hosted runner if the repository is named docs-internal and is within the github organization. If the repository doesn't match this path, then it will run on an ubuntu-latest runner hosted by GitHub. For more information on these options see "Choosing the runner for a job."</div>
+    <span class="hljs-attr">steps:</span><div class="annotation">L27: Groups together all the steps that will run as part of the check-links job. Each job in a workflow has its own steps section.</div>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span>
-
+<div class="annotation">L28-29: The uses keyword tells the job to retrieve the action named actions/checkout. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will run against the repository's code or you are using an action defined in the repository.
+</div>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">node-version:</span> <span class="hljs-number">16.13</span><span class="hljs-string">.x</span>
           <span class="hljs-attr">cache:</span> <span class="hljs-string">npm</span>
-
+<div class="annotation">L31-35: This step uses the actions/setup-node action to install the specified version of the Node.js software package on the runner, which gives you access to the npm command.
+</div>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span>
-
+<div class="annotation">L37-38: The run keyword tells the job to execute a command on the runner. In this case, npm ci is used to install the npm software packages for the project.
+</div>
       <span class="hljs-comment"># Creates file "$/files.json", among others</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Gather</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">fileOutput:</span> <span class="hljs-string">'json'</span>
-
+<div class="annotation">L41-44: Uses the trilom/file-changes-action action to gather all the changed files. This example is pinned to a specific version of the action, using the a6ca26c14274c33b15e6499323aac178af06ad4b SHA.
+</div>
       <span class="hljs-comment"># For verification</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Show</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">cat</span> <span class="hljs-string">$HOME/files.json</span>
-
+<div class="annotation">L47-48: Lists the contents of files.json. This will be visible in the workflow run's log, and can be useful for debugging.
+</div>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(warnings,</span> <span class="hljs-string">changed</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
@@ -3941,7 +3951,7 @@ jobs:
             --check-images \
             --verbose \
             --list $HOME/files.json
-</span>
+</span><div class="annotation">L50-58: This step uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes all the parameters it needs to run.</div>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(critical,</span> <span class="hljs-string">all</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
@@ -3949,7 +3959,7 @@ jobs:
             --exit \
             --verbose \
             --check-images \
-            --level critical</span></code></pre>
+            --level critical</span><div class="annotation">L60-67: This step also uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes a different set of parameters.</div></code></pre>
                       </div>
                       <h2 id="understanding-the-example">
                         <a
