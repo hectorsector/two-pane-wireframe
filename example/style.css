@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "system-ui";
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #f6f6f6;
+}
+
+/* section */
+
+section {
+  margin-bottom: 24px;
+}
+
+section.two-pane {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+section.two-pane.file-name {
+  margin-bottom: 0;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  section.two-pane {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+
+  section.two-pane:not(.file-name):hover {
+    z-index: 100;
+    outline: 2px solid black;
+  }
+}
+
+/* pane */
+
+.pane {
+  flex: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .pane {
+    flex: 0.5;
+  }
+}
+
+section.two-pane.file-name .pane {
+  border-bottom: 1px solid black;
+}
+
+/* pane contents */
+
+.pane > pre {
+  height: 100%;
+  padding: 16px;
+  background-color: #ddd;
+}
+
+.pane > p {
+  padding: 16px 0;
+  height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .pane > p {
+    padding: 16px;
+  }
+}
