@@ -3823,7 +3823,8 @@
                       </div>
                       <!-- END LEFT SIDE -->
                       <!-- START RIGHT SIDE -->
-                      <div class="annotations col-md-6">L1: The name of the workflow as it will appear in the "Actions" tab of the GitHub repository.</div>
+                      <div class="annotations col-md-6">The name of the workflow as it will appear in
+                        the "Actions" tab of the GitHub repository.</div>
                       <!-- END RIGHT SIDE -->
                     </div>
                     <!-- END TWO PANE SECTION -->
@@ -3852,7 +3853,16 @@
 
                       <!-- START RIGHT SIDE -->
                       <div class="annotations col-md-6">
-                        L7: The on keyword lets you define the events that trigger when the workflow is run. You can define multiple events here. For more information, see "Triggering a workflow."
+                        The <code>on</code> keyword lets you define the
+                                events that trigger when the workflow is run.
+                                You can define multiple events here. For more
+                                information, see "<a
+                                  href="https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#using-events-to-trigger-workflows"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Triggering a workflow"
+                                  data-intro="How to automatically trigger GitHub Actions workflows"
+                                  >Triggering a workflow</a
+                                >."
                       </div>
                       <!-- END RIGHT SIDE -->
                     </div>
@@ -3868,7 +3878,16 @@
 
                       <!-- START RIGHT SIDE -->
                       <div class="annotations col-md-6">
-                        L8: Add the workflow_dispatch event if you want to be able to manually run this workflow from the UI. For more information, see  workflow_dispatch.
+                        Add the <code>workflow_dispatch</code> event if
+                                you want to be able to manually run this
+                                workflow from the UI. For more information, see
+                                <a
+                                  href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Events that trigger workflows"
+                                  data-intro="You can configure your workflows to run when specific activity on GitHub happens, at a scheduled time, or when an event outside of GitHub occurs."
+                                  ><code>workflow_dispatch</code></a
+                                >.
                       </div>
                       <!-- END RIGHT SIDE -->
                     </div>
@@ -3887,7 +3906,17 @@
 
                       <!-- START RIGHT SIDE -->
                       <div class="annotations col-md-6">
-                        L9-11: Add the push event, so that the workflow runs automatically every time a commit is pushed to a branch called main. For more information, see  push.
+                        Add the <code>push</code> event, so that the
+                                workflow runs automatically every time a commit
+                                is pushed to a branch called <code>main</code>.
+                                For more information, see
+                                <a
+                                  href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Events that trigger workflows"
+                                  data-intro="You can configure your workflows to run when specific activity on GitHub happens, at a scheduled time, or when an event outside of GitHub occurs."
+                                  ><code>push</code></a
+                                >.
                       </div>
                       <!-- END RIGHT SIDE -->
                     </div>
@@ -3903,7 +3932,17 @@
                       
                       <!-- START RIGHT SIDE -->
                       <div class="annotations col-md-6">
-                        L12: Add the pull_request event, so that the workflow runs automatically every time a pull request is created or updated. For more information, see pull_request.
+                        Add the <code>pull_request</code> event, so that
+                                the workflow runs automatically every time a
+                                pull request is created or updated. For more
+                                information, see
+                                <a
+                                  href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Events that trigger workflows"
+                                  data-intro="You can configure your workflows to run when specific activity on GitHub happens, at a scheduled time, or when an event outside of GitHub occurs."
+                                  ><code>pull_request</code></a
+                                >.
                       </div>
                       <!-- END RIGHT SIDE -->
                     </div>
@@ -3923,7 +3962,16 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L14-17: Modifies the default permissions granted to GITHUB_TOKEN. This will vary depending on the needs of your workflow. For more information, see "Assigning permissions to jobs."
+  Modifies the default permissions granted to
+                                <code>GITHUB_TOKEN</code>. This will vary
+                                depending on the needs of your workflow. For
+                                more information, see "<a
+                                  href="https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Assigning permissions to jobs"
+                                  data-intro="Modify the default permissions granted to GITHUB_TOKEN."
+                                  >Assigning permissions to jobs</a
+                                >."
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -3951,7 +3999,15 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L20-21: Creates a concurrency group for specific events, and uses the || operator to define fallback values. For more information, see "Using concurrency."
+  Creates a concurrency group for specific events,
+                                and uses the <code>||</code> operator to define
+                                fallback values. For more information, see "<a
+                                  href="https://docs.github.com/en/actions/using-jobs/using-concurrency"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Using concurrency"
+                                  data-intro="Run a single job at a time."
+                                  >Using concurrency</a
+                                >."
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -3968,7 +4024,8 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L22: Cancels any currently running job or workflow in the same concurrency group.
+  Cancels any currently running job or workflow in
+                                the same concurrency group.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -3985,7 +4042,8 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L24: Groups together all the jobs that run in the workflow file.
+  Groups together all the jobs that run in the
+                                workflow file.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4001,7 +4059,9 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L25: Defines a job with the ID check-links that is stored within the jobs key.
+  Defines a job with the ID
+                                <code>check-links</code> that is stored within
+                                the <code>jobs</code> key.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4017,7 +4077,23 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L26: Configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. In this example, the job will run on a self-hosted runner if the repository is named docs-internal and is within the github organization. If the repository doesn't match this path, then it will run on an ubuntu-latest runner hosted by GitHub. For more information on these options see "Choosing the runner for a job."
+  Configures the job to run on a GitHub-hosted
+                                runner or a self-hosted runner, depending on the
+                                repository running the workflow. In this
+                                example, the job will run on a self-hosted
+                                runner if the repository is named
+                                <code>docs-internal</code> and is within the
+                                <code>github</code> organization. If the
+                                repository doesn't match this path, then it will
+                                run on an <code>ubuntu-latest</code> runner
+                                hosted by GitHub. For more information on these
+                                options see "<a
+                                  href="https://docs.github.com/en/actions/using-jobs/choosing-the-runner-for-a-job"
+                                  data-product-title="GitHub Actions"
+                                  data-title="Choosing the runner for a job"
+                                  data-intro="Define the type of machine that will process a job in your workflow."
+                                  >Choosing the runner for a job</a
+                                >."
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4033,7 +4109,10 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L27: Groups together all the steps that will run as part of the check-links job. Each job in a workflow has its own steps section.
+  Groups together all the steps that will run as
+                                part of the <code>check-links</code> job. Each
+                                job in a workflow has its own
+                                <code>steps</code> section.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4051,7 +4130,16 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L28-29: The uses keyword tells the job to retrieve the action named actions/checkout. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will run against the repository's code or you are using an action defined in the repository.
+  The <code>uses</code> keyword tells the job to
+                                retrieve the action named
+                                <code>actions/checkout</code>. This is an action
+                                that checks out your repository and downloads it
+                                to the runner, allowing you to run actions
+                                against your code (such as testing tools). You
+                                must use the checkout action any time your
+                                workflow will run against the repository's code
+                                or you are using an action defined in the
+                                repository.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4073,7 +4161,11 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L31-35: This step uses the actions/setup-node action to install the specified version of the Node.js software package on the runner, which gives you access to the npm command.
+  This step uses the
+                                <code>actions/setup-node</code> action to
+                                install the specified version of the Node.js
+                                software package on the runner, which gives you
+                                access to the <code>npm</code> command.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4091,7 +4183,10 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L37-38: The run keyword tells the job to execute a command on the runner. In this case, npm ci is used to install the npm software packages for the project.
+  The <code>run</code> keyword tells the job to
+                                execute a command on the runner. In this case,
+                                <code>npm ci</code> is used to install the npm
+                                software packages for the project.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4113,7 +4208,15 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L41-44: Uses the trilom/file-changes-action action to gather all the changed files. This example is pinned to a specific version of the action, using the a6ca26c14274c33b15e6499323aac178af06ad4b SHA.
+  Uses the
+                                <code>trilom/file-changes-action</code> action
+                                to gather all the changed files. This example is
+                                pinned to a specific version of the action,
+                                using the
+                                <code
+                                  >a6ca26c14274c33b15e6499323aac178af06ad4b</code
+                                >
+                                SHA.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4133,7 +4236,9 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L47-48: Lists the contents of files.json. This will be visible in the workflow run's log, and can be useful for debugging.
+  Lists the contents of <code>files.json</code>.
+                                This will be visible in the workflow run's log,
+                                and can be useful for debugging.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4159,7 +4264,13 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L50-58: This step uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes all the parameters it needs to run.
+  This step uses <code>run</code> command to
+                                execute a script that is stored in the
+                                repository at
+                                <code
+                                  >script/rendered-content-link-checker.mjs</code
+                                >
+                                and passes all the parameters it needs to run.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
@@ -4183,7 +4294,13 @@
 
 <!-- START RIGHT SIDE -->
 <div class="annotations col-md-6">
-  L60-67: This step also uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes a different set of parameters.
+  This step also uses <code>run</code> command to
+                                execute a script that is stored in the
+                                repository at
+                                <code
+                                  >script/rendered-content-link-checker.mjs</code
+                                >
+                                and passes a different set of parameters.
 </div>
 <!-- END RIGHT SIDE -->
 </div>
