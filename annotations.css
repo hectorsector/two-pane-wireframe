@@ -1,63 +1,28 @@
-  /* section */
-  
-  section {
-    margin-bottom: 24px;
-  }
-  
-  section.two-pane {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-    
-  section:last-child {
-    margin-bottom: 0;
-  }
-  
-  @media screen and (min-width: 768px) {
-    section.two-pane {
-      flex-direction: row;
-      margin-bottom: 0;
-    }
-  
-    section.two-pane:not(.file-name):hover {
-      z-index: 100;
-      outline: 2px solid black;
-    }
-  }
-  
-  /* pane */
-  
-  .pane {
-    flex: 1;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .pane {
-      flex: 0.5;
-    }
-  }
-  
-  section.two-pane.file-name .pane {
-    border-bottom: 1px solid black;
-  }
-  
-  /* pane contents */
-  
-  .pane > .code-sample {
-    height: 100%;
-    padding: 16px;
-    background-color: #ddd;
-  }
-  
-  .pane > .annotation {
-    padding: 16px 0;
-    height: 100%;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .pane > p {
-      padding: 16px;
-    }
-  }
-  
+.single-pane {
+  max-width: 720px;
+}
+
+.code-sample {
+  background-color: var(--color-canvas-subtle);
+  border-left: 1px solid var(--color-border-default);
+  border-right: 1px solid var(--color-border-default);
+  border-bottom: 0px;
+}
+.code-sample > pre {
+  border: 0px !important;
+  margin-top: 0px !important;
+  /* padding-top: 0px !important; */
+  margin: 0px !important;
+}
+
+.annotations {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px
+}
+
+.two-pane > div:last-child > .code-sample {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom: 1px solid var(--color-border-default);
+}

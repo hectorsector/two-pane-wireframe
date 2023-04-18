@@ -1833,8 +1833,8 @@
         content: 'hHvRqR,';
       } /*!sc - narrow/inline */
       .ZKdXm {
-        margin: 0 auto;
-        max-width: 720px;
+        /* margin: 0 auto; */
+        /* max-width: 720px; */
         display: grid;
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas: 'topper' 'intro' 'sidebar' 'content';
@@ -3392,7 +3392,7 @@
                   </ul>
                 </nav>
               </div>
-              <div class="Box-sc-1gh2r6s-0 sc-bczRLJ ZKdXm">
+              <div class="Box-sc-1gh2r6s-0 sc-bczRLJ ZKdXm mx-auto">
                 <div class="Box-sc-1gh2r6s-0 iYYqoc">
                   <div class="d-flex flex-items-baseline flex-justify-between">
                     <h1 id="title-h1" class="border-bottom-0">
@@ -3540,6 +3540,7 @@
                     <div
                       class="MarkdownContent_markdownBody__gRgTE markdown-body"
                     >
+                    <div class="single-pane mx-auto">
                       <h2 id="example-overview">
                         <a
                           aria-hidden=""
@@ -3792,158 +3793,357 @@
                           >."
                         </p>
                       </div>
-                      <div class="code-extra">
-                        <header
-                          class="d-flex flex-items-center flex-justify-between p-2 text-small rounded-top-1 border"
-                        >
-                          <span>YAML</span
-                          ><button
-                            class="js-btn-copy btn btn-sm tooltipped tooltipped-nw"
-                            data-clipboard-text="name: &#x27;Link Checker: All English&#x27;
+                    </div>
 
-# **What it does**: Renders the content of every page and check all internal links.
-# **Why we have it**: To make sure all links connect correctly.
-# **Who does it impact**: Docs content.
+<div class="two-pane">
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="col-md-6">
+                        <header class="d-flex flex-items-center flex-justify-between p-2 text-small rounded-top-1 border">
+                        <span>YAML</span>
+                        <button class="js-btn-copy btn btn-sm tooltipped tooltipped-nw" data-clipboard-text="  cancel-in-progress: true" aria-label="Copy code to clipboard">
+                          <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-copy" aria-hidden="true">
+                            <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                            <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                          </svg>
+                        </button>
+                      </header>
+                      </div>
+                      <!-- END LEFT SIDE -->
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
+                      </div>
+                    <!-- END TWO PANE SECTION -->
 
-permissions:
-  contents: read
-  # Needed for the &#x27;trilom/file-changes-action&#x27; action
-  pull-requests: read
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+                        <pre><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">'Link Checker: All English'</span></code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
+                      <!-- START RIGHT SIDE -->
+                      <div class="annotations col-md-6">L1: The name of the workflow as it will appear in the "Actions" tab of the GitHub repository.</div>
+                      <!-- END RIGHT SIDE -->
+                    </div>
+                    <!-- END TWO PANE SECTION -->
 
-# This allows a subsequently queued workflow run to interrupt previous runs
-concurrency:
-  group: &#x27;${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}&#x27;
-  cancel-in-progress: true
-
-jobs:
-  check-links:
-    runs-on: ${{ fromJSON(&#x27;[&#x22;ubuntu-latest&#x22;, &#x22;self-hosted&#x22;]&#x27;)[github.repository == &#x27;github/docs-internal&#x27;] }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.13.x
-          cache: npm
-
-      - name: Install
-        run: npm ci
-
-      # Creates file &#x22;$/files.json&#x22;, among others
-      - name: Gather files changed
-        uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
-        with:
-          fileOutput: &#x27;json&#x27;
-
-      # For verification
-      - name: Show files changed
-        run: cat $HOME/files.json
-
-      - name: Link check (warnings, changed files)
-        run: |
-          ./script/rendered-content-link-checker.mjs \
-            --language en \
-            --max 100 \
-            --check-anchors \
-            --check-images \
-            --verbose \
-            --list $HOME/files.json
-
-      - name: Link check (critical, all files)
-        run: |
-          ./script/rendered-content-link-checker.mjs \
-            --language en \
-            --exit \
-            --verbose \
-            --check-images \
-            --level critical"
-                            aria-label="Copy code to clipboard"
-                          >
-                            <svg
-                              version="1.1"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              class="octicon octicon-copy"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"
-                              ></path>
-                              <path
-                                d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"
-                              ></path>
-                            </svg>
-                          </button>
-                        </header>
-<pre><code class="hljs language-yaml"><section class="two-pane"><div class="pane"><span class="hljs-attr">name:</span> <span class="hljs-string">'Link Checker: All English'</span></div>
-<div class="pane"><span class="annotation">L1: The name of the workflow as it will appear in the "Actions" tab of the GitHub repository.</span></div></section>
-
-<span class="hljs-comment"># **What it does**: Renders the content of every page and check all internal links.</span>
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-comment"># **What it does**: Renders the content of every page and check all internal links.</span>
 <span class="hljs-comment"># **Why we have it**: To make sure all links connect correctly.</span>
 <span class="hljs-comment"># **Who does it impact**: Docs content.</span>
+</code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
 
-<span class="hljs-attr">on:</span><div class="annotation">L7: The on keyword lets you define the events that trigger when the workflow is run. You can define multiple events here. For more information, see "Triggering a workflow."</div>
-  <span class="hljs-attr">workflow_dispatch:</span><div class="annotation">L8: Add the workflow_dispatch event if you want to be able to manually run this workflow from the UI. For more information, see  workflow_dispatch.</div>
-  <span class="hljs-attr">push:</span>
-    <span class="hljs-attr">branches:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span><div class="annotation">L9-11: Add the push event, so that the workflow runs automatically every time a commit is pushed to a branch called main. For more information, see  push.</div>
-      <span class="hljs-attr">pull_request:</span>
-<div class="annotation">L12: Add the pull_request event, so that the workflow runs automatically every time a pull request is created or updated. For more information, see pull_request.
-</div>
-<span class="hljs-attr">permissions:</span>
+                    </div>
+                    <!-- END TWO PANE SECTION -->
+
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">on:</span></code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
+
+                      <!-- START RIGHT SIDE -->
+                      <div class="annotations col-md-6">
+                        L7: The on keyword lets you define the events that trigger when the workflow is run. You can define multiple events here. For more information, see "Triggering a workflow."
+                      </div>
+                      <!-- END RIGHT SIDE -->
+                    </div>
+                    <!-- END TWO PANE SECTION -->
+
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">workflow_dispatch:</span></code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
+
+                      <!-- START RIGHT SIDE -->
+                      <div class="annotations col-md-6">
+                        L8: Add the workflow_dispatch event if you want to be able to manually run this workflow from the UI. For more information, see  workflow_dispatch.
+                      </div>
+                      <!-- END RIGHT SIDE -->
+                    </div>
+                    <!-- END TWO PANE SECTION -->
+                    
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">push:</span>
+  <span class="hljs-attr">branches:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>
+</code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
+
+                      <!-- START RIGHT SIDE -->
+                      <div class="annotations col-md-6">
+                        L9-11: Add the push event, so that the workflow runs automatically every time a commit is pushed to a branch called main. For more information, see  push.
+                      </div>
+                      <!-- END RIGHT SIDE -->
+                    </div>
+                    <!-- END TWO PANE SECTION -->
+                    
+                    <!-- START TWO PANE SECTION -->
+                    <div class="d-flex flex-column flex-md-row">
+                      <!-- START LEFT SIDE -->
+                      <div class="code-sample col-md-6">
+                        <pre><code class="hljs language-yaml"><span class="hljs-attr">pull_request:</span></code></pre>
+                      </div>
+                      <!-- END LEFT SIDE -->
+                      
+                      <!-- START RIGHT SIDE -->
+                      <div class="annotations col-md-6">
+                        L12: Add the pull_request event, so that the workflow runs automatically every time a pull request is created or updated. For more information, see pull_request.
+                      </div>
+                      <!-- END RIGHT SIDE -->
+                    </div>
+                    <!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">permissions:</span>
   <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
   <span class="hljs-comment"># Needed for the 'trilom/file-changes-action' action</span>
   <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">read</span>
-<div class="annotation">L14-17: Modifies the default permissions granted to GITHUB_TOKEN. This will vary depending on the needs of your workflow. For more information, see "Assigning permissions to jobs."
+</code></pre>
 </div>
-<span class="hljs-comment"># This allows a subsequently queued workflow run to interrupt previous runs</span>
-<span class="hljs-attr">concurrency:</span>
-  <span class="hljs-attr">group:</span> <span class="hljs-string">'$<span class="hljs-template-variable">{{ github.workflow }}</span> @ $<span class="hljs-template-variable">{{ github.event.pull_request.head.label || github.head_ref || github.ref }}</span>'</span><div class="annotation">L20-21: Creates a concurrency group for specific events, and uses the || operator to define fallback values. For more information, see "Using concurrency."</div>
-  <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span>
-<div class="annotation">L22: Cancels any currently running job or workflow in the same concurrency group.
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L14-17: Modifies the default permissions granted to GITHUB_TOKEN. This will vary depending on the needs of your workflow. For more information, see "Assigning permissions to jobs."
 </div>
-<span class="hljs-attr">jobs:</span><div class="annotation">L24: Groups together all the jobs that run in the workflow file.</div>
-  <span class="hljs-attr">check-links:</span><div class="annotation">L25: Defines a job with the ID check-links that is stored within the jobs key.</div>
-    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span><div class="annotation">L26: Configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. In this example, the job will run on a self-hosted runner if the repository is named docs-internal and is within the github organization. If the repository doesn't match this path, then it will run on an ubuntu-latest runner hosted by GitHub. For more information on these options see "Choosing the runner for a job."</div>
-    <span class="hljs-attr">steps:</span><div class="annotation">L27: Groups together all the steps that will run as part of the check-links job. Each job in a workflow has its own steps section.</div>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">
+<span class="hljs-comment"># This allows a subsequently queued workflow run to interrupt previous runs</span></code></pre></div>
+<!-- END LEFT SIDE -->
+
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">concurrency:</span>
+  <span class="hljs-attr">group:</span> <span class="hljs-string">'$<span class="hljs-template-variable">{{ github.workflow }}</span> @ $<span class="hljs-template-variable">{{ github.event.pull_request.head.label || github.head_ref || github.ref }}</span>'</span></code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L20-21: Creates a concurrency group for specific events, and uses the || operator to define fallback values. For more information, see "Using concurrency."
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">  <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span>  
+</code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L22: Cancels any currently running job or workflow in the same concurrency group.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml"><span class="hljs-attr">jobs:</span>
+</code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L24: Groups together all the jobs that run in the workflow file.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">  <span class="hljs-attr">check-links:</span></code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L25: Defines a job with the ID check-links that is stored within the jobs key.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span></code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L26: Configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. In this example, the job will run on a self-hosted runner if the repository is named docs-internal and is within the github organization. If the repository doesn't match this path, then it will run on an ubuntu-latest runner hosted by GitHub. For more information on these options see "Choosing the runner for a job."
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">    <span class="hljs-attr">steps:</span></code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L27: Groups together all the steps that will run as part of the check-links job. Each job in a workflow has its own steps section.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span>
-<div class="annotation">L28-29: The uses keyword tells the job to retrieve the action named actions/checkout. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will run against the repository's code or you are using an action defined in the repository.
+</code></pre>
 </div>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L28-29: The uses keyword tells the job to retrieve the action named actions/checkout. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will run against the repository's code or you are using an action defined in the repository.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">node-version:</span> <span class="hljs-number">16.13</span><span class="hljs-string">.x</span>
           <span class="hljs-attr">cache:</span> <span class="hljs-string">npm</span>
-<div class="annotation">L31-35: This step uses the actions/setup-node action to install the specified version of the Node.js software package on the runner, which gives you access to the npm command.
+
+</code></pre>
 </div>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L31-35: This step uses the actions/setup-node action to install the specified version of the Node.js software package on the runner, which gives you access to the npm command.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span>
-<div class="annotation">L37-38: The run keyword tells the job to execute a command on the runner. In this case, npm ci is used to install the npm software packages for the project.
+</code></pre>
 </div>
-      <span class="hljs-comment"># Creates file "$/files.json", among others</span>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L37-38: The run keyword tells the job to execute a command on the runner. In this case, npm ci is used to install the npm software packages for the project.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-comment"># Creates file "$/files.json", among others</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Gather</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">fileOutput:</span> <span class="hljs-string">'json'</span>
-<div class="annotation">L41-44: Uses the trilom/file-changes-action action to gather all the changed files. This example is pinned to a specific version of the action, using the a6ca26c14274c33b15e6499323aac178af06ad4b SHA.
+          
+</code></pre>
 </div>
-      <span class="hljs-comment"># For verification</span>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L41-44: Uses the trilom/file-changes-action action to gather all the changed files. This example is pinned to a specific version of the action, using the a6ca26c14274c33b15e6499323aac178af06ad4b SHA.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-comment"># For verification</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Show</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">cat</span> <span class="hljs-string">$HOME/files.json</span>
-<div class="annotation">L47-48: Lists the contents of files.json. This will be visible in the workflow run's log, and can be useful for debugging.
+
+</code></pre>
 </div>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(warnings,</span> <span class="hljs-string">changed</span> <span class="hljs-string">files)</span>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L47-48: Lists the contents of files.json. This will be visible in the workflow run's log, and can be useful for debugging.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(warnings,</span> <span class="hljs-string">changed</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
             --language en \
@@ -3952,17 +4152,45 @@ jobs:
             --check-images \
             --verbose \
             --list $HOME/files.json
-</span><div class="annotation">L50-58: This step uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes all the parameters it needs to run.</div>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(critical,</span> <span class="hljs-string">all</span> <span class="hljs-string">files)</span>
+
+</code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L50-58: This step uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes all the parameters it needs to run.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+                    
+<!-- START TWO PANE SECTION -->
+<div class="d-flex flex-column flex-md-row">
+<!-- START LEFT SIDE -->
+<div class="code-sample col-md-6">
+<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(critical,</span> <span class="hljs-string">all</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
             --language en \
             --exit \
             --verbose \
             --check-images \
-            --level critical</span><div class="annotation">L60-67: This step also uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes a different set of parameters.</div></code></pre>
-                      </div>
-                      <h2 id="understanding-the-example">
+            --level critical</span>
+</code></pre>
+</div>
+<!-- END LEFT SIDE -->
+
+<!-- START RIGHT SIDE -->
+<div class="annotations col-md-6">
+  L60-67: This step also uses run command to execute a script that is stored in the repository at script/rendered-content-link-checker.mjs and passes a different set of parameters.
+</div>
+<!-- END RIGHT SIDE -->
+</div>
+<!-- END TWO PANE SECTION -->
+</div>          
+                    <div class="single-pane mx-auto">
+                    <h2 id="understanding-the-example">
                         <a
                           aria-hidden=""
                           tabindex="-1"
@@ -4342,7 +4570,8 @@ jobs:
                                   class="d-flex flex-items-center flex-justify-between p-2 text-small rounded-top-1 border"
                                 >
                                   <span>YAML</span
-                                  ><button
+                                  >
+                                  <button
                                     class="js-btn-copy btn btn-sm tooltipped tooltipped-nw"
                                     data-clipboard-text="  cancel-in-progress: true"
                                     aria-label="Copy code to clipboard"
@@ -4963,7 +5192,7 @@ jobs:
                         </li>
                       </ul>
                     </div>
-                  </div>
+                  </div></div>
                 </div>
               </div>
             </div>
