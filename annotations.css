@@ -1,5 +1,7 @@
 .single-pane {
   max-width: 720px;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .code-sample {
@@ -13,6 +15,16 @@
   margin-top: 0px !important;
   /* padding-top: 0px !important; */
   margin: 0px !important;
+  /* word-break: break-all; */
+}
+
+.code-sample > pre > code > span {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
 
 .annotations {
