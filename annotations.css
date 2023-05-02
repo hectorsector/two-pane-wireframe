@@ -27,10 +27,14 @@
   word-wrap: break-word;
 }
 
+.section:hover {
+    background: var(--color-canvas-subtle);
+}
+
 .annotations {
   padding-left: 16px;
   padding-right: 16px;
-  margin-bottom: 16px
+  margin-bottom: 16px;
 }
 
 .two-pane > div:last-child > .code-sample {
