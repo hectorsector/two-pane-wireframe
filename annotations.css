@@ -27,7 +27,7 @@
   word-wrap: break-word;
 }
 
-.section:hover {
+.section:not(.header):hover {
     background: var(--color-canvas-subtle);
 }
 
