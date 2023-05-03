@@ -45,7 +45,7 @@
   z-index: 999;
   /* background-color: yellow !important; */
   /* border-top: 1px solid black; */
-  outline: 1px solid black;
+  outline: 1px solid var(--color-severe-emphasis);
 
   /* div > pre:hover {
     z-index: 999;
