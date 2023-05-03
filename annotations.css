@@ -1,83 +1,74 @@
+/* Layout
+   |          .single-pane          |
+   |            {content}           |
+   |           .two-pane            |
+   | .section                       |
+   |   .code-sample    .annotation  |
+   |     {code}          {content}  |
+*/
+
+/* main article content before/after annotated block */
 .single-pane {
   max-width: 720px;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-.code-sample {
-  background-color: var(--color-canvas-subtle);
-  border-left: 1px solid var(--color-border-default);
-  border-right: 1px solid var(--color-border-default);
-  /* border-top: 1px solid var(--color-canvas-subtle); */
-  border-bottom: 1px solid var(--color-canvas-subtle);
-}
-
-.code-sample > pre {
-  border: 0px !important;
-  margin-top: 0px !important;
-  /* padding-top: 0px !important; */
-  margin: 0px !important;
-  /* word-break: break-all; */
-  border-top-color: var(--color-canvas-subtle) !important;
-  border-bottom-color: var(--color-canvas-subtle) !important;
-  padding-top: 16px !important;
-  padding-bottom: 16px !important;
-}
-
-/* .code-sample > pre > code > span {
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-} */
-
-.section {
-  /* padding-top: 1px;
-  padding-bottom: 1px; */
-  /* border-top: 1px solid var(--color-canvas-subtle);
-  border-bottom: 1px solid var(--color-canvas-subtle); */
-}
-
-
-.section:not(.header):hover {
-  z-index: 999;
-  /* background-color: yellow !important; */
-  /* border-top: 1px solid black; */
-  outline: 1px solid var(--color-severe-emphasis);
-
-  /* div > pre:hover {
-    z-index: 999;
-    background-color: yellow !important;
-  } */
-}
-
-.annotations {
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
+/* used to close out the code sample with proper borders */
 .two-pane > div:last-child > .code-sample {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   border-bottom: 1px solid var(--color-border-default);
 }
 
+
+/* used to select entire row: .code-sample + .annotation */
+.section {
+}
+
+/* the outlines that provides side-by-side highlighting */
+/* turned off for < medium */
+@media (min-width: 768px) {
+  .section:not(.header):hover {
+    outline: 1px solid var(--color-severe-emphasis);
+  }
+}
+
+
+/* just the code sample (left pane) */
+.code-sample {
+  background-color: var(--color-canvas-subtle);
+  border-left: 1px solid var(--color-border-default);
+  border-right: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-canvas-subtle);
+}
+
+/* specifically the formatted text inside of .code-sample */
+.code-sample > pre {
+  border: 0px !important;
+  margin: 0px !important;
+}
+
+/* just the annotation (right pane) */
+.annotations {
+  padding: 16px;
+}
+
+/* line numbers plugin */
 /* select all line numbers + code */
 .hljs-ln-line {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
 
+/* line numbers plugin */
 /* selects only line numbers */
 .hljs-ln-numbers {
   color: var(--color-fg-muted);
-  width: min-content;
+  width: 12px;
 }
 
+/* line numbers plugin */
 /* selects only code */
 .hljs-ln-code {
 overflow-x: auto;
@@ -86,6 +77,4 @@ overflow-x: auto;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
-  /* word-break: break-all; */
-  width: 100%;
 }
