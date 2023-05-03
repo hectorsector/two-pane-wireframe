@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script> -->
+    <script>
+      // hljs.unregisterLanguage("yaml")
+      // hljs.highlightAll();
+      hljs.initLineNumbersOnLoad(
+        {singleLine: true}
+      );
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -3812,7 +3826,7 @@
                     <div class="d-flex flex-column flex-md-row section">
                       <!-- START LEFT SIDE -->
                       <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-comment"># **What it does**: Renders the content of every page and check all internal links.</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="2"><span class="hljs-comment"># **What it does**: Renders the content of every page and check all internal links.</span>
 <span class="hljs-comment"># **Why we have it**: To make sure all links connect correctly.</span>
 <span class="hljs-comment"># **Who does it impact**: Docs content.</span>
 </code></pre>
@@ -3826,7 +3840,7 @@
                     <div class="d-flex flex-column flex-md-row section">
                       <!-- START LEFT SIDE -->
                       <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">on:</span></code></pre>
+<pre><code class="hljs language-yaml" data-ln-start-from="5"><span class="hljs-attr">on:</span></code></pre>
                       </div>
                       <!-- END LEFT SIDE -->
 
@@ -3851,7 +3865,7 @@
                     <div class="d-flex flex-column flex-md-row section">
                       <!-- START LEFT SIDE -->
                       <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">workflow_dispatch:</span></code></pre>
+<pre><code class="hljs language-yaml" data-ln-start-from="6"><span class="hljs-attr">workflow_dispatch:</span></code></pre>
                       </div>
                       <!-- END LEFT SIDE -->
 
@@ -3876,7 +3890,7 @@
                     <div class="d-flex flex-column flex-md-row section">
                       <!-- START LEFT SIDE -->
                       <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">push:</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="7"><span class="hljs-attr">push:</span>
   <span class="hljs-attr">branches:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>
 </code></pre>
@@ -3905,7 +3919,7 @@
                     <div class="d-flex flex-column flex-md-row section">
                       <!-- START LEFT SIDE -->
                       <div class="code-sample col-md-6">
-                        <pre><code class="hljs language-yaml"><span class="hljs-attr">pull_request:</span></code></pre>
+                        <pre><code class="hljs language-yaml" data-ln-start-from="10"><span class="hljs-attr">pull_request:</span></code></pre>
                       </div>
                       <!-- END LEFT SIDE -->
 
@@ -3931,7 +3945,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">permissions:</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="11"><span class="hljs-attr">permissions:</span>
   <span class="hljs-attr">contents:</span> <span class="hljs-string">read</span>
   <span class="hljs-comment"># Needed for the 'trilom/file-changes-action' action</span>
   <span class="hljs-attr">pull-requests:</span> <span class="hljs-string">read</span>
@@ -3960,8 +3974,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">
-<span class="hljs-comment"># This allows a subsequently queued workflow run to interrupt previous runs</span></code></pre></div>
+<pre><code class="hljs language-yaml" data-ln-start-from="15"><span class="hljs-comment"># This allows a subsequently queued workflow run to interrupt previous runs</span></code></pre></div>
 <!-- END LEFT SIDE -->
 
 </div>
@@ -3971,7 +3984,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">concurrency:</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="16"><span class="hljs-attr">concurrency:</span>
   <span class="hljs-attr">group:</span> <span class="hljs-string">'$<span class="hljs-template-variable">{{ github.workflow }}</span> @ $<span class="hljs-template-variable">{{ github.event.pull_request.head.label || github.head_ref || github.ref }}</span>'</span></code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -3996,7 +4009,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">  <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="18">  <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span>
 </code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -4014,7 +4027,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml"><span class="hljs-attr">jobs:</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="19"><span class="hljs-attr">jobs:</span>
 </code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -4032,7 +4045,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">  <span class="hljs-attr">check-links:</span></code></pre>
+<pre><code class="hljs language-yaml" data-ln-start-from="20">  <span class="hljs-attr">check-links:</span></code></pre>
 </div>
 <!-- END LEFT SIDE -->
 
@@ -4050,7 +4063,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span></code></pre>
+<pre><code class="hljs language-yaml" data-ln-start-from="21">    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">${{</span> <span class="hljs-string">fromJSON('["ubuntu-latest",</span> <span class="hljs-string">"self-hosted"</span><span class="hljs-string">]')[github.repository</span> <span class="hljs-string">==</span> <span class="hljs-string">'github/docs-internal'</span><span class="hljs-string">]</span> <span class="hljs-string">}}</span></code></pre>
 </div>
 <!-- END LEFT SIDE -->
 
@@ -4082,7 +4095,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">    <span class="hljs-attr">steps:</span></code></pre>
+<pre><code class="hljs language-yaml" data-ln-start-from="22">    <span class="hljs-attr">steps:</span></code></pre>
 </div>
 <!-- END LEFT SIDE -->
 
@@ -4101,7 +4114,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="23">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span>
 </code></pre>
 </div>
@@ -4128,12 +4141,11 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="25">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">node-version:</span> <span class="hljs-number">16.13</span><span class="hljs-string">.x</span>
           <span class="hljs-attr">cache:</span> <span class="hljs-string">npm</span>
-
 </code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -4154,7 +4166,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="30">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span>
 </code></pre>
 </div>
@@ -4175,12 +4187,11 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-comment"># Creates file "$/files.json", among others</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="32">      <span class="hljs-comment"># Creates file "$/files.json", among others</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Gather</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">uses:</span> <span class="hljs-string">trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b</span>
         <span class="hljs-attr">with:</span>
           <span class="hljs-attr">fileOutput:</span> <span class="hljs-string">'json'</span>
-
 </code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -4205,10 +4216,9 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-comment"># For verification</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="37">      <span class="hljs-comment"># For verification</span>
       <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Show</span> <span class="hljs-string">files</span> <span class="hljs-string">changed</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">cat</span> <span class="hljs-string">$HOME/files.json</span>
-
 </code></pre>
 </div>
 <!-- END LEFT SIDE -->
@@ -4227,7 +4237,7 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(warnings,</span> <span class="hljs-string">changed</span> <span class="hljs-string">files)</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="40">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(warnings,</span> <span class="hljs-string">changed</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
             --language en \
@@ -4235,9 +4245,7 @@
             --check-anchors \
             --check-images \
             --verbose \
-            --list $HOME/files.json
-
-</code></pre>
+            --list $HOME/files.json</code></pre>
 </div>
 <!-- END LEFT SIDE -->
 
@@ -4259,15 +4267,14 @@
 <div class="d-flex flex-column flex-md-row section">
 <!-- START LEFT SIDE -->
 <div class="code-sample col-md-6">
-<pre><code class="hljs language-yaml">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(critical,</span> <span class="hljs-string">all</span> <span class="hljs-string">files)</span>
+<pre><code class="hljs language-yaml" data-ln-start-from="49">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Link</span> <span class="hljs-string">check</span> <span class="hljs-string">(critical,</span> <span class="hljs-string">all</span> <span class="hljs-string">files)</span>
         <span class="hljs-attr">run:</span> <span class="hljs-string">|
           ./script/rendered-content-link-checker.mjs \
             --language en \
             --exit \
             --verbose \
             --check-images \
-            --level critical</span>
-</code></pre>
+            --level critical</span></code></pre>
 </div>
 <!-- END LEFT SIDE -->
 

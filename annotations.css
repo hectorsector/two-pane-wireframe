@@ -8,37 +8,84 @@
   background-color: var(--color-canvas-subtle);
   border-left: 1px solid var(--color-border-default);
   border-right: 1px solid var(--color-border-default);
-  border-bottom: 0px;
+  /* border-top: 1px solid var(--color-canvas-subtle); */
+  border-bottom: 1px solid var(--color-canvas-subtle);
 }
+
 .code-sample > pre {
   border: 0px !important;
   margin-top: 0px !important;
   /* padding-top: 0px !important; */
   margin: 0px !important;
   /* word-break: break-all; */
+  border-top-color: var(--color-canvas-subtle) !important;
+  border-bottom-color: var(--color-canvas-subtle) !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
 }
 
-.code-sample > pre > code > span {
+/* .code-sample > pre > code > span {
   overflow-x: auto;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+} */
+
+.section {
+  /* padding-top: 1px;
+  padding-bottom: 1px; */
+  /* border-top: 1px solid var(--color-canvas-subtle);
+  border-bottom: 1px solid var(--color-canvas-subtle); */
 }
 
+
 .section:not(.header):hover {
-    background: var(--color-canvas-subtle);
+  z-index: 999;
+  /* background-color: yellow !important; */
+  /* border-top: 1px solid black; */
+  outline: 1px solid black;
+
+  /* div > pre:hover {
+    z-index: 999;
+    background-color: yellow !important;
+  } */
 }
 
 .annotations {
   padding-left: 16px;
   padding-right: 16px;
-  margin-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .two-pane > div:last-child > .code-sample {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   border-bottom: 1px solid var(--color-border-default);
+}
+
+/* select all line numbers + code */
+.hljs-ln-line {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+/* selects only line numbers */
+.hljs-ln-numbers {
+  color: var(--color-fg-muted);
+  width: min-content;
+}
+
+/* selects only code */
+.hljs-ln-code {
+overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  /* word-break: break-all; */
+  width: 100%;
 }
