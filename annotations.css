@@ -30,7 +30,8 @@
 /* turned off for < medium */
 @media (min-width: 768px) {
   .section:not(.header):hover {
-    outline: 1px solid var(--color-severe-emphasis);
+    border-radius: 4px;;
+    outline: 2px solid var(--color-accent-fg);
   }
 }
 
@@ -50,8 +51,18 @@
 }
 
 /* just the annotation (right pane) */
+@media (min-width: 768px) {
+  .annotations {
+    padding: 16px 0 16px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
 .annotations {
-  padding: 16px;
+  padding: 16px 0 32px 0px;
+  font-size: 14px;
+}
 }
 
 /* line numbers plugin */
@@ -64,7 +75,7 @@
 /* line numbers plugin */
 /* selects only line numbers */
 .hljs-ln-numbers {
-  color: var(--color-fg-muted);
+  color: var(--color-fg-subtle);
   width: 12px;
 }
 
@@ -77,4 +88,8 @@ overflow-x: auto;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+.hljs-ln {
+  margin-bottom: 0px !important;
 }
